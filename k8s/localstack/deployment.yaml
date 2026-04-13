@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localstack-deployment
+  namespace: localstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: localstack
+  template:
+    metadata:
+      labels:
+        app: localstack
+    spec:
+      containers:
+      - name: localstack
+        image: localstack/localstack:latest
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        env:
+          - name: LOCALSTACK_AUTH_TOKEN
+            value: "ls-lEguLIwa-HAYE-8169-WutO-zuPU02063029"
