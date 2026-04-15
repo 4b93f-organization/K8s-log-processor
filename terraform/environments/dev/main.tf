@@ -21,3 +21,13 @@ module "worker" {
     aws_endpoint_url = var.aws_endpoint_url
     s3_bucket = module.s3.bucket_name
 }
+
+module "api" {
+    source = "../../modules/k8s/api"
+    namespace = module.namespace.name
+    api_image = var.api_image
+    aws_region = var.aws_region
+    aws_endpoint_url = var.aws_endpoint_url
+    s3_bucket = module.s3.bucket_name
+    sqs_queue_url = module.sqs.url
+}

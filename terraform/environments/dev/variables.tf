@@ -20,7 +20,11 @@ variable "sqs_name" {
 variable "worker_image" {
   description = "Docker image for the worker"
   type = string
-  default = "ghcr.io/4b93f/k8s-prod-worker:latest"
+}
+
+variable "api_image" {
+  description = "Docker image for the API"
+  type = string
 }
 
 variable "aws_region" {
