@@ -16,22 +16,6 @@ def get_sqs():
     return boto3.client("sqs", endpoint_url=AWS_ENDPOINT_URL, region_name=AWS_REGION)
 
 
-def create_resources():
-    s3 = get_s3()
-    sqs_client = get_sqs()
-    try:
-        s3.create_bucket(Bucket=S3_BUCKET)
-        print(f"[init] created S3 bucket '{S3_BUCKET}'")
-    except Exception:
-        pass
-    try:
-        response = sqs_client.create_queue(QueueName="log-processing")
-        print("[init] created SQS queue 'log-processing'")
-        return response["QueueUrl"]
-    except Exception:
-        return sqs_client.get_queue_url(QueueName="log-processing")["QueueUrl"]
-
-
 def parse_log(content: str) -> dict:
     lines = content.strip().splitlines()
     status_codes = Counter()
@@ -82,9 +66,6 @@ def process_message(message: dict):
 
 
 def main():
-    global SQS_QUEUE_URL
-    SQS_QUEUE_URL = create_resources()
-
     sqs = get_sqs()
     print("Worker started, polling SQS...")
 

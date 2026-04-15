@@ -25,7 +25,7 @@ spec:
             memory: "512Mi"
         env:
         - name: AWS_ENDPOINT_URL
-          value: "http://localstack-service.localstack.svc.cluster.local:4566"
+          value: "http://host.minikube.internal:4566"
         - name: AWS_REGION
           value: "us-east-1"
         - name: AWS_ACCESS_KEY_ID

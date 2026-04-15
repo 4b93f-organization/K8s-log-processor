@@ -14,23 +14,23 @@ spec:
         app: worker
     spec:
       containers:
-      - name: worker
-        image: ghcr.io/4b93f/k8s-prod-worker:latest
-        resources:
-          requests:
-            cpu: "500m"
-            memory: "256Mi"
-          limits:
-            cpu: "1"
-            memory: "512Mi"
-        env:
-          - name: SQS_QUEUE_URL
-            value: "http://placeholder"
-          - name: AWS_ACCESS_KEY_ID
-            value: "placeholder"
-          - name: AWS_SECRET_ACCESS_KEY
-            value: "placeholder"
-          - name: AWS_ENDPOINT_URL
-            value: "http://localstack-service.localstack.svc.cluster.local:4566"
-          - name: AWS_REGION
-            value: "us-east-1"
+        - name: worker
+          image: ghcr.io/4b93f/k8s-prod-worker:latest
+          resources:
+            requests:
+              cpu: 500m
+              memory: 256Mi
+            limits:
+              cpu: '1'
+              memory: 512Mi
+          env:
+            - name: SQS_QUEUE_URL
+              value: http://placeholder
+            - name: AWS_ACCESS_KEY_ID
+              value: placeholder
+            - name: AWS_SECRET_ACCESS_KEY
+              value: placeholder
+            - name: AWS_ENDPOINT_URL
+              value: http://host.minikube.internal:4566
+            - name: AWS_REGION
+              value: us-east-1
