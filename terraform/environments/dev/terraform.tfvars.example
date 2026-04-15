@@ -1,0 +1,15 @@
+# LocalStack auth token — get from app.localstack.cloud
+auth_token = "ls-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# AWS resource names
+sqs_name    = "log-processing"
+bucket_name = "log-processing"
+
+# Docker images
+worker_image = "ghcr.io/your-user/k8s-prod-worker:latest"
+api_image    = "ghcr.io/your-user/k8s-prod-api:latest"
+
+# For local dev (Minikube): use host.minikube.internal
+# For real AWS: leave empty or remove this var
+aws_endpoint_url = "http://host.minikube.internal:4566"
+aws_region       = "us-east-1"
