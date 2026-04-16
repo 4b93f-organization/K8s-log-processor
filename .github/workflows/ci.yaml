@@ -46,6 +46,21 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.actor }}/k8s-prod-api:latest
 
+      - name: Scan API code with Snyk
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --file=app/api/requirements.txt --severity-threshold=high
+
+      - name: Scan API image with Snyk
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: ghcr.io/${{ github.actor }}/k8s-prod-api:latest
+          args: --file=app/api/Dockerfile --severity-threshold=high
+
   build-worker:
     needs: changes
     # if: needs.changes.outputs.worker == 'true'
@@ -64,19 +79,21 @@ jobs:
       - name: Build and push worker image
         uses: docker/build-push-action@v6
         with:
-            context: ./app/worker
-            push: true
-            tags: ghcr.io/${{ github.actor }}/k8s-prod-worker:latest
-  
-  security:
-    name: Snyk Security Scan
-    runs-on: ubuntu-latest
-  
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run Snyk to check for vulnerabilities
+          context: ./app/worker
+          push: true
+          tags: ghcr.io/${{ github.actor }}/k8s-prod-worker:latest
+
+      - name: Scan worker code with Snyk
         uses: snyk/actions/python@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high
+          args: --file=app/worker/requirements.txt --severity-threshold=high
+
+      - name: Scan worker image with Snyk
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: ghcr.io/${{ github.actor }}/k8s-prod-worker:latest
+          args: --file=app/worker/Dockerfile --severity-threshold=high
