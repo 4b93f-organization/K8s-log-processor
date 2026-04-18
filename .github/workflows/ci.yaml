@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [feat/github-actions, main]
+    branches: [main]
     paths:
       - "app/api/**"
       - "app/worker/**"
