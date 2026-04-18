@@ -6,8 +6,8 @@ sqs_name    = "log-processing"
 bucket_name = "log-processing"
 
 # Docker images
-worker_image = "ghcr.io/your-user/k8s-prod-worker:latest"
-api_image    = "ghcr.io/your-user/k8s-prod-api:latest"
+worker_image = "ghcr.io/your-org/k8s-prod-worker:latest"
+api_image    = "ghcr.io/your-org/k8s-prod-api:latest"
 
 # For local dev (Minikube): use host.minikube.internal
 # For real AWS: leave empty or remove this var
