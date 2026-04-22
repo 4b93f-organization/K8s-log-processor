@@ -7,9 +7,6 @@ __pycache__/
 .env
 
 
-# Localstack auth
-k8s/localstack/values.yaml
-
 # Terraform
 **/.terraform/
 *.tfstate
